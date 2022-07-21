@@ -6,8 +6,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import EventCard from '@/components/EventCard.vue'
+import EventService from '@/services/EventService'
 
 export default {
   name: 'Home',
@@ -18,6 +18,16 @@ export default {
     return {
       events: null
     }
+  },
+  created() {
+    EventService.getEvents()
+      .then(response => {
+        this.events = response.data
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
